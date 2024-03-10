@@ -1,3 +1,5 @@
+If you've having trouble running any of these because the python plugins aren't working then you should stick them all in a folder, shift right click the open folder and open in cmd or powershell, then run a command like 'python G+W.py' to run the first script. This is how I've got everything working. You may also need to install somethings with PIP.
+
 G+W.py:
 
 This file will run the algorithm once and display the graph with the nodes coloured based on the algorithms output. Closing the graph window will re-run the algorithm and display a new graph with the nodes coloured from the new data.
