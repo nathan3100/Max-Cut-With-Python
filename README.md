@@ -1,4 +1,4 @@
-G+W.py
+G+W.py \\
 This file will run the algorithm once and display the graph with the nodes coloured based on the algorithms output. Closing the graph window will re-run the algorithm and display a new graph with the nodes coloured from the new data.
 The algorithm used is made by Goemans and Williamsons here: https://dl.acm.org/doi/abs/10.1145/227683.227684 
 
