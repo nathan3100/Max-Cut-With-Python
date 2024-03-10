@@ -27,7 +27,7 @@ G+WText.py:
 
 This file is used to make the text file easier to understand. It will go through the text file one by one until you run out of entries, each time you close the graph window it will go onto the next one.
 
-GraphMaker.py
+GraphMaker.py:
 
 This is a nice little script that lets the user put in the size of the adjacency matrix (number of nodes) and how many edges the graph should have and it'll make a random graph. Very useful for quickly making some test data.
 
