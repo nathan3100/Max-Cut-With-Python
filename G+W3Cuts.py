@@ -140,11 +140,12 @@ for x in previous_values:
             
     cut = sum_edges_between_sets(top_nodes, bottom_nodes, edges)
     cuts.append(cut[0])
-    if cut[0] < 0.87*313:
+    if cut[0] < round(0.878*311, 0):
         ratio = False
     
     #Increment the counter
     loop += 1
 
+#print(sorted(cuts))
 print(cuts)
 print(ratio)
