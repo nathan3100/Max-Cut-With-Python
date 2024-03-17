@@ -94,12 +94,9 @@ import networkx as nx
 from scipy.linalg import sqrtm
 loop = 1
 correct = 0
-reference_value = np.array([-1. + 0.j, -1. + 0.j,  1. + 0.j,  1. + 0.j,  1. + 0.j, -1. + 0.j,  1. + 0.j, -1. + 0.j])
-reference_value2 = np.array([ 1. + 0.j,  1. + 0.j, -1. + 0.j, -1. + 0.j, -1. + 0.j,  1. + 0.j, -1. + 0.j,  1. + 0.j])
 cut = 0
 max_cut = 0
-#while True:
-
+#while True:  
 def sum_edges_between_sets(set1, set2, edges):
     total_weight = 0
 
