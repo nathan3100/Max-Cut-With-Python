@@ -51,7 +51,7 @@ This script again will only show 1 graph to help with memory issues, and again t
 
 G+W3Cuts.py:
 
-This is a quick little script that goes through every recoreded cut in 'previous_values3.txt' and will output True if every cut is within 87.9% of the max-cut of this graph. (The max-cut is assumed to be 313)
+This is a quick little script that goes through every recoreded cut in 'previous_values3.txt' and will output True if every cut is within 87.9% of the max-cut of this graph. (The max-cut is assumed to be 311)
 
 
 GraphMaker.py:
