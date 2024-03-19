@@ -149,3 +149,21 @@ for x in previous_values:
 #print(sorted(cuts))
 print(cuts)
 print(ratio)
+
+while True:
+    # Number to search for
+    number_to_find = input("What number should I search for? ")
+
+    # Initialize a list to store positions
+    positions = []
+
+    # Loop through the array
+    for i in range(len(cuts)):
+        if cuts[i] == int(number_to_find):
+            positions.append(i+1)
+
+    # Check if any positions were found
+    if positions:
+        print(f"The graphs with cut length {number_to_find} are: {positions}")
+    else:
+        print(f"No graphs have cut length {number_to_find}.")
