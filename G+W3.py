@@ -101,9 +101,23 @@ constraints += [
 objective = sum(0.5*(1 - X[i,j]) for (i,j) in edges)
 prob = cp.Problem(cp.Maximize(objective), constraints)
 prob.solve()
-x = sqrtm(X.value)
+'''
+print('Big X: ')
+for i in range(50):
+    for j in range(50):
+        print(str(i) + ',' + str(j) + ': ' + str(X[i,j].value))
+        '''
+#x = sqrtm(X.value)
+#unit = 0
+'''
+for k in range(50):
+        unit = 0
+        for i in range(50):
+            unit += (x[k,i].real * x[k,i].real + x[k,i].imag * x[k,i].imag)
+        print(unit)
+        '''
 u = np.random.randn(len(adj_matrix))
-x = np.sign(x @ u)
+x = np.sign(X.value @ u)
 #print(u)
 #print(x)
 

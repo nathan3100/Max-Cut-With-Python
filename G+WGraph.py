@@ -48,14 +48,14 @@ def write_previous_value(file_path, x):
     with open(file_path, 'a') as file:
         file.write("[")
         for i in range (len(x)-1):
-            if x[i] == (1+0j):
-                file.write(" 1. + 0.j, ")
-            elif x[i] == (-1+0j):
-                file.write("-1. + 0.j, ")
-        if x[len(x)-1] == (1+0j):
-            file.write(" 1. + 0.j")
-        elif x[len(x)-1] == (-1+0j):
-            file.write("-1. + 0.j")
+            if x[i] == (1):
+                file.write(" 1. ,")
+            elif x[i] == (-1):
+                file.write("-1. ,")
+        if x[len(x)-1] == (1):
+            file.write(" 1. ")
+        elif x[len(x)-1] == (-1):
+            file.write("-1. ")
         file.write("] \n")
 
 def sum_edges_between_sets(set1, set2, edges):

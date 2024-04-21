@@ -126,9 +126,9 @@ constraints += [
 objective = sum(0.5*(1 - X[i,j]) for (i,j) in edges)
 prob = cp.Problem(cp.Maximize(objective), constraints)
 prob.solve()
-x = sqrtm(X.value)
+#x = sqrtm(X.value)
 u = np.random.randn(len(adj_matrix))
-x = np.sign(x @ u)
+x = np.sign(X.value @ u)
 #print(u)
 #print(x)
 

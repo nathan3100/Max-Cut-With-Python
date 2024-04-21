@@ -156,6 +156,19 @@ while True:
 
     # Initialize a list to store positions
     positions = []
+    
+    if number_to_find == 'small' or number_to_find == 'smallest':
+        positions = sorted(cuts)
+        print("The shortest cut length is " + str(positions[0]))
+        number_to_find = positions[0]
+        positions = []
+    elif number_to_find == 'big' or number_to_find == 'biggest' or number_to_find == 'large' or number_to_find == 'largest':
+        positions = sorted(cuts)
+        print("The largest cut length is " + str(positions[len(cuts)-1]))
+        number_to_find = positions[len(cuts)-1]
+        positions = []
+    else:
+        positions = []
 
     # Loop through the array
     for i in range(len(cuts)):

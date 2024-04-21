@@ -28,9 +28,9 @@ from scipy.linalg import sqrtm
 import time
 loop = 1
 correct = 0
-file_path = "previous_values.txt"
-reference_value = np.array([-1. + 0.j, -1. + 0.j,  1. + 0.j,  1. + 0.j,  1. + 0.j, -1. + 0.j,  1. + 0.j, -1. + 0.j])
-reference_value2 = np.array([ 1. + 0.j,  1. + 0.j, -1. + 0.j, -1. + 0.j, -1. + 0.j,  1. + 0.j, -1. + 0.j,  1. + 0.j])
+file_path = "previous_values_new.txt"
+reference_value = np.array([-1. , -1. ,  1. ,  1. ,  1. , -1. ,  1. , -1. ])
+reference_value2 = np.array([ 1. ,  1. , -1. , -1. , -1. ,  1. , -1. ,  1. ])
 #previous_values = []
 
 def read_previous_values(file_path):
@@ -46,14 +46,14 @@ def write_previous_value(file_path, x):
     with open(file_path, 'a') as file:
         file.write("[")
         for i in range (len(x)-1):
-            if x[i] == (1+0j):
-                file.write(" 1. + 0.j, ")
-            elif x[i] == (-1+0j):
-                file.write("-1. + 0.j, ")
-        if x[len(x)-1] == (1+0j):
-            file.write(" 1. + 0.j")
-        elif x[len(x)-1] == (-1+0j):
-            file.write("-1. + 0.j")
+            if x[i] == (1):
+                file.write(" 1. ,")
+            elif x[i] == (-1):
+                file.write("-1. ,")
+        if x[len(x)-1] == (1):
+            file.write(" 1. ")
+        elif x[len(x)-1] == (-1):
+            file.write("-1. ")
         file.write("] \n")
 
 X = cp.Variable((8,8), symmetric = True)
@@ -64,11 +64,11 @@ constraints += [
 objective = sum(0.5*(1 - X[i,j]) for (i,j) in edges)
 prob = cp.Problem(cp.Maximize(objective), constraints)
 prob.solve()
-x1 = sqrtm(X.value)
-print(x1)
+#x1 = sqrtm(X.value)
+#print(x1)
 while True:    
     u = np.random.randn(8)
-    x = np.sign(x1 @ u)
+    x = np.sign(X.value @ u)
     #print(u)
     #print(x)
     
@@ -86,7 +86,7 @@ while True:
     else:
         print("x is not a previous value. Adding to the file.")
         write_previous_value(file_path, x)
-        time.sleep(6)
+        #time.sleep(6)
     
     accuracy = correct/loop * 100
     print("Current Accuracy is " + str(accuracy) +"%")

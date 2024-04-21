@@ -17,7 +17,7 @@ for i in range(len(adj_matrix)):
         if adj_matrix[i][j] == 1:
             edges.append((i, j))  
 
-print(edges)
+#print(edges)
 #print(len(edges))
 
 import cvxpy as cp
@@ -25,6 +25,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import networkx as nx
 from scipy.linalg import sqrtm
+from math import sqrt
 loop = 1
 correct = 0
 reference_value = np.array([-1. + 0.j, -1. + 0.j,  1. + 0.j,  1. + 0.j,  1. + 0.j, -1. + 0.j,  1. + 0.j, -1. + 0.j])
@@ -38,16 +39,51 @@ while True:
     objective = sum(0.5*(1 - X[i,j]) for (i,j) in edges)
     prob = cp.Problem(cp.Maximize(objective), constraints)
     prob.solve()
+    print('Big X: ')
+    for i in range(8):
+        for j in range(8):
+            print(str(i) + ',' + str(j) + ': ' + str(X[i,j].value))
     #print(X)
     #input("")
+
     x = sqrtm(X.value)
+
+    print('Little x: ')
+    for i in range(8):
+        for j in range(8):
+            print(str(i) + ',' + str(j) + ': ' + str(x[i,j]))
     #print(x)
     #input("")
+    unit = 0
+    
+    for i in range(8):
+        unit += x[0,i].real * x[0,i].real
+    print(unit)
+    unit = 0
+    for i in range(8):
+        unit += x[0,i].imag * x[0,i].imag
+    print(unit)
+    
+    for k in range(8):
+        unit = 0
+        for i in range(8):
+            unit += (x[k,i].real * x[k,i].real + x[k,i].imag * x[k,i].imag)
+        print(unit)
+    #print(sqrt(unit))
+    
     u = np.random.randn(len(adj_matrix))
-    x = np.sign(x @ u)
+    x = np.sign(X.value @ u)
+    print(x)
+    print('Rounded Little x: ')
+    for i in range(8):
+        print(str(i) + ': ' + str(x[i]))
+    print('Rounded Little u: ')
+    for i in range(8):
+        print(str(i) + ': ' + str(u[i]))
     #print(u)
     #print(x)
-
+    
+    
     # Create a graph
     G = nx.Graph()
 
