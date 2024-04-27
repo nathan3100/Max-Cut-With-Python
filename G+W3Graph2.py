@@ -195,7 +195,7 @@ if int(line) > 0 and int(line) <= len(previous_values):
     # 2nd window
     plt.figure(str(int(line) + int(loop)) + ': ' + str(cut[0]))
     seed_value = 42
-    pos_simplified = nx.random_layout(G, seed=seed_value)
+    pos_simplified = nx.kamada_kawai_layout(G)
     nx.draw(G, pos_simplified, with_labels=True, labels={i: i+1 for i in G.nodes}, node_color=[node_colors[i] for i in G.nodes], font_color='white', font_weight='bold')
     nx.draw_networkx_edges(G, pos_simplified, edgelist=edges, edge_color='green')
     nx.draw_networkx_edges(G, pos_simplified, edgelist=orange_edges, edge_color='orange')

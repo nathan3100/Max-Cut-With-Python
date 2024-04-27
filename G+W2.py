@@ -151,8 +151,9 @@ while True:
 
     #Draw the cut graph
     plt.figure('The Cut Of ' + str(cut))
-    seed_value = 142
-    pos_cut = nx.random_layout(G, seed=seed_value)  # You can choose a different layout if needed
+    seed_value = 1
+    pos_cut = nx.kamada_kawai_layout(G)
+    #pos_cut = nx.random_layout(G, seed=seed_value)  # You can choose a different layout if needed
     nx.draw(G, pos_cut, with_labels=True, labels={i: i+1 for i in G.nodes}, node_color=[node_colors[i] for i in G.nodes], font_color='white', font_weight='bold')
 
 
@@ -165,7 +166,7 @@ while True:
     plt.figure('Original Graph')
     G2 = nx.Graph()
     G2.add_edges_from(edges)
-    pos_original = nx.random_layout(G, seed=seed_value)  # You can use different layout algorithms
+    pos_original = nx.kamada_kawai_layout(G)  # You can use different layout algorithms
     nx.draw(G2, pos_original, with_labels=True, labels={i: i+1 for i in G2.nodes}, font_weight='bold', node_size=500, node_color='white', font_color='black', edge_color='gray', linewidths=1, alpha=0.7)
 
     fig_cut = plt.figure('The Cut Of ' + str(cut))
