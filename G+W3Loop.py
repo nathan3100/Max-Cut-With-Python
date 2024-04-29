@@ -92,37 +92,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import networkx as nx
 from scipy.linalg import sqrtm
-import time
 loop = 1
 correct = 0
 cut = 0
 max_cut = 0
-file_path = "previous_values3.txt"
-loop_times = []
-
-def read_previous_values(file_path):
-    try:
-        with open(file_path, 'r') as file:
-            previous_values = [np.array(eval(line)) for line in file.readlines()]
-        return previous_values
-    except FileNotFoundError:
-        print("File Not Found")
-        return []
-
-def write_previous_value(file_path, x):
-    with open(file_path, 'a') as file:
-        file.write("[")
-        for i in range (len(x)-1):
-            if x[i] == (1):
-                file.write(" 1. ,")
-            elif x[i] == (-1):
-                file.write("-1. ,")
-        if x[len(x)-1] == (1):
-            file.write(" 1. ")
-        elif x[len(x)-1] == (-1):
-            file.write("-1. ")
-        file.write("] \n")
-        
+#while True:  
 def sum_edges_between_sets(set1, set2, edges):
     total_weight = 0
 
@@ -135,20 +109,15 @@ def sum_edges_between_sets(set1, set2, edges):
 
     return total_weight
 
-num_iterations = 100
-for i in range(num_iterations):
-    start_time = time.time()
-    
-    X = cp.Variable((len(adj_matrix),len(adj_matrix)), symmetric = True)
-    constraints = [X >> 0]
-    constraints += [
+X = cp.Variable((len(adj_matrix),len(adj_matrix)), symmetric = True)
+constraints = [X >> 0]
+constraints += [
     X[i,i] == 1 for i in range(len(adj_matrix))
     ]
-    objective = sum(0.5*(1 - X[i,j]) for (i,j) in edges)
-    prob = cp.Problem(cp.Maximize(objective), constraints)
-    prob.solve()
-    
-    
+objective = sum(0.5*(1 - X[i,j]) for (i,j) in edges)
+prob = cp.Problem(cp.Maximize(objective), constraints)
+prob.solve()
+while max_cut != 311:
     #x = sqrtm(X.value)
     u = np.random.randn(len(adj_matrix))
     x = np.sign(X.value @ u)
@@ -165,11 +134,6 @@ for i in range(num_iterations):
 
             
     cut = sum_edges_between_sets(top_nodes, bottom_nodes, edges)
-    
-    end_time = time.time()
-    iteration_time = 1000*(end_time - start_time)
-    loop_times.append(iteration_time)
-    
     if cut > max_cut:
         print("A new max-cut of " + str(cut) + " has been found")
         max_cut = cut
@@ -186,10 +150,8 @@ for i in range(num_iterations):
     else:
         print("The Current Maximum has been found " + str(correct) + " times")
     print("Current Accuracy is " + str(accuracy) + "%")    
-    print("Current Loop is " + str(loop) + ' Which Took ' + str(iteration_time) + ' Milliseconds.')
+    print("Current Loop is " + str(loop))
     loop +=1
+    
+print(x)
 
-average_time = sum(loop_times) / num_iterations    
-print('Average Time: ' + str(average_time) + ' Milliseconds.')
-#write_previous_value(file_path,x)
-#previous_values.append(x)
